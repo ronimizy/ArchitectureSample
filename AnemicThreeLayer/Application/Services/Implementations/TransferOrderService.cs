@@ -6,7 +6,6 @@ using Application.Mapping;
 using DataAccess;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using TransferOperationDto = Application.Dto.TransferOperationDto;
 
 namespace Application.Services.Implementations;
 
@@ -35,9 +34,9 @@ internal class TransferOrderService : ITransferOrderService
         Guid studentGroupId,
         CancellationToken cancellationToken)
     {
-        var order = await _context.TransferOrders.GetEntityAsync(orderId, cancellationToken);
-        var student = await _context.Students.GetEntityAsync(studentId, cancellationToken);
-        var studentGroup = await _context.StudentGroups.GetEntityAsync(studentGroupId, cancellationToken);
+        TransferOrder order = await _context.TransferOrders.GetEntityAsync(orderId, cancellationToken);
+        Student student = await _context.Students.GetEntityAsync(studentId, cancellationToken);
+        StudentGroup studentGroup = await _context.StudentGroups.GetEntityAsync(studentGroupId, cancellationToken);
 
         var operation = new TransferOperation(Guid.NewGuid(), order, student, studentGroup);
 
@@ -49,7 +48,7 @@ internal class TransferOrderService : ITransferOrderService
 
     public async Task ExecuteOrderAsync(Guid orderId, CancellationToken cancellationToken)
     {
-        var order = await _context.TransferOrders
+        TransferOrder order = await _context.TransferOrders
             .Include(x => x.Operations)
             .ThenInclude(x => x.Group)
             .Include(x => x.Operations)
@@ -62,7 +61,7 @@ internal class TransferOrderService : ITransferOrderService
         if (order.IsCompleted)
             throw TransferOrderException.OrderAlreadyCompleted(orderId);
 
-        foreach (var operation in order.Operations)
+        foreach (TransferOperation operation in order.Operations)
         {
             if (operation.Group.Students.Count.Equals(operation.Group.MaxStudentCount))
                 throw TransferOrderException.GroupIsFull(operation.Group.Id);

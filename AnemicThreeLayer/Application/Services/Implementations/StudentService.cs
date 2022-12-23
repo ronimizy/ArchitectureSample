@@ -17,7 +17,7 @@ internal class StudentService : IStudentService
 
     public async Task<StudentDto> CreateStudentAsync(string name, Guid groupId, CancellationToken cancellationToken)
     {
-        var group = await _context.StudentGroups.GetEntityAsync(groupId, cancellationToken);
+        StudentGroup group = await _context.StudentGroups.GetEntityAsync(groupId, cancellationToken);
         var student = new Student(Guid.NewGuid(), name, group);
 
         _context.Students.Add(student);

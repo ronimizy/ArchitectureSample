@@ -21,7 +21,8 @@ public class StudentGroupController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<StudentGroupDto>> CreateAsync([FromBody] CreateStudentGroupModel model)
     {
-        var group = await _service.CreateStudentGroupAsync(model.Name, model.MaxStudentCount, CancellationToken);
+        StudentGroupDto group =
+            await _service.CreateStudentGroupAsync(model.Name, model.MaxStudentCount, CancellationToken);
         return Ok(group);
     }
 }

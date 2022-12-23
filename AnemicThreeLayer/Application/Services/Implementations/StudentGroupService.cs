@@ -14,7 +14,10 @@ internal class StudentGroupService : IStudentGroupService
         _context = context;
     }
 
-    public async Task<StudentGroupDto> CreateStudentGroupAsync(string name, int maxStudentCount, CancellationToken cancellationToken)
+    public async Task<StudentGroupDto> CreateStudentGroupAsync(
+        string name,
+        int maxStudentCount,
+        CancellationToken cancellationToken)
     {
         var group = new StudentGroup(Guid.NewGuid(), name, maxStudentCount);
 

@@ -21,7 +21,7 @@ public class TransferOrderController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TransferOrderDto>> CreateAsync()
     {
-        var order = await _service.CreateTransferOrderAsync(CancellationToken);
+        TransferOrderDto order = await _service.CreateTransferOrderAsync(CancellationToken);
         return Ok(order);
     }
 
@@ -30,13 +30,11 @@ public class TransferOrderController : ControllerBase
         Guid orderId,
         [FromBody] AddTransferOperationModel model)
     {
-        var operation = await _service.AddTransferOperationAsync
-        (
+        TransferOperationDto operation = await _service.AddTransferOperationAsync(
             orderId,
             model.StudentId,
             model.StudentGroupId,
-            CancellationToken
-        );
+            CancellationToken);
 
         return Ok(operation);
     }

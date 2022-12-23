@@ -4,5 +4,6 @@ namespace Application.Services;
 
 public interface IStudentGroupService
 {
-    Task<StudentGroupDto> CreateStudentGroupAsync(string name, int maxStudentCount, CancellationToken cancellationToken);
+    Task<StudentGroupDto>
+        CreateStudentGroupAsync(string name, int maxStudentCount, CancellationToken cancellationToken);
 }

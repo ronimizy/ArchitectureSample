@@ -21,7 +21,7 @@ public class StudentController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<StudentDto>> CreateAsync([FromBody] CreateStudentModel model)
     {
-        var student = await _service.CreateStudentAsync(model.Name, model.GroupId, CancellationToken);
+        StudentDto student = await _service.CreateStudentAsync(model.Name, model.GroupId, CancellationToken);
         return Ok(student);
     }
 }

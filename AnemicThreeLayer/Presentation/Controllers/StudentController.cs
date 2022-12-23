@@ -1,12 +1,15 @@
 using Application.Dto;
 using Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Constants;
 using Presentation.Models.Students;
 
 namespace Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Policy = PolicyName.FacultyPolicy)]
 public class StudentController : ControllerBase
 {
     private readonly IStudentService _service;

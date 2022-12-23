@@ -1,11 +1,14 @@
 using Application.Dto;
 using Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Constants;
 using Presentation.Models.StudentGroups;
 
 namespace Presentation.Controllers;
 
 [ApiController]
+[Authorize(Policy = PolicyName.IsuPolicy)]
 [Route("api/[controller]")]
 public class StudentGroupController : ControllerBase
 {

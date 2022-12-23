@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess;
 
-public class DatabaseContext : DbContext
+public sealed class DatabaseContext : DbContext
 {
     public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
@@ -15,6 +15,7 @@ public class DatabaseContext : DbContext
     public DbSet<StudentGroup> StudentGroups { get; set; }
     public DbSet<TransferOperation> TransferOperations { get; set; }
     public DbSet<TransferOrder> TransferOrders { get; set; }
+    public DbSet<Account> Accounts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -39,5 +40,7 @@ public class DatabaseContext : DbContext
         {
             builder.HasMany(x => x.Operations).WithOne(x => x.Order);
         });
+
+        modelBuilder.Entity<Account>();
     }
 }

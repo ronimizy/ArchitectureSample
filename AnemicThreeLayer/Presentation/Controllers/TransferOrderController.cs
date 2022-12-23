@@ -1,5 +1,6 @@
 using Application.Dto;
 using Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Models.TransferOrders;
 
@@ -7,6 +8,7 @@ namespace Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class TransferOrderController : ControllerBase
 {
     private readonly ITransferOrderService _service;

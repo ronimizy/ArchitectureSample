@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
         collection.AddScoped<IStudentService, StudentService>();
         collection.AddScoped<IStudentGroupService, StudentGroupService>();
         collection.AddScoped<ITransferOrderService, TransferOrderService>();
+        collection.AddScoped<IAccountService, AccountService>();
 
         return collection;
     }

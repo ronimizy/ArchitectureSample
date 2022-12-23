@@ -32,7 +32,7 @@ public class AuthenticationController : ControllerBase
         var claims = new Claim[]
         {
             new Claim(ClaimTypes.Name, account.Name),
-            new Claim(ClaimTypes.Sid, account.Id.ToString("D")),
+            new Claim(ClaimTypes.Sid, account.Id.ToString()),
             new Claim(ClaimTypes.Role, account.Role),
         };
 
